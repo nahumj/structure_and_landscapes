@@ -48,11 +48,15 @@ class TestNKModelFactory(TC):
 
     def test_no_dependencies(self):
         smooth_nk = self.factory.no_dependencies(2)
+        print smooth_nk.dependency_lists
+        print smooth_nk.contribution_lookup_tables
         self.assertEqual(smooth_nk.dependency_lists, [[0], [1]])
         self.assertEqual(len(smooth_nk.contribution_lookup_tables), 2)
-        smooth_nk.calculate_fitness(Bitstring("0"))
-        self.assertEqual(len(smooth_nk.contribution_lookup_tables[0]), 1)
+        self.assertEqual(len(smooth_nk.contribution_lookup_tables[0]), 0)
         self.assertEqual(len(smooth_nk.contribution_lookup_tables[1]), 0)
+        smooth_nk.calculate_fitness(Bitstring("00"))
+        self.assertEqual(len(smooth_nk.contribution_lookup_tables[0]), 1)
+        self.assertEqual(len(smooth_nk.contribution_lookup_tables[1]), 1)
 
     def test_model_with_uniform_contribution_lookup_table(self):
         dep_lists = [[0, 1], [1, 2, 0], [2]]

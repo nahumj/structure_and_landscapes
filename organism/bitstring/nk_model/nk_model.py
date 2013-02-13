@@ -181,8 +181,8 @@ class NKModelSimple(object):
         """
         num_loci = len(bitstring)
 
-        assert(num_loci <= len(self.dependency_lists) and
-               num_loci <= len(self.contribution_lookup_tables))
+        assert(num_loci == len(self.dependency_lists) and
+               num_loci == len(self.contribution_lookup_tables))
         fitness_tally = 0.0
         for loci in range(num_loci):
             dependency_list = self.dependency_lists[loci]
